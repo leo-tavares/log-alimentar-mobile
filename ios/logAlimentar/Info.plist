@@ -53,5 +53,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+  <key>UIAppFonts</key>
+  <string>Feather.ttf</string>
 </dict>
 </plist>
