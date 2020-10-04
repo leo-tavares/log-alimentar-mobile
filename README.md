@@ -1,3 +1,5 @@
+> :construction: projeto em constante evolução :construction:
+
 # log-alimentar
 
 ## Introdução 
@@ -17,3 +19,8 @@ Esse aplicativo é destinado a todas as pessoas que desejam uma maneira simples 
 ## Quais tecnologias serão tecnologias empregadas?
 
 E importante deixar claro que este repositório destinasse ao app mobile. Este projeto esta sendo continuamente construido com o framework [react-native](https://reactnative.dev/). O backend será construido com o express e tbm teremos um "apoio" da arquitetura serverless para construção da alguns nanoserviços 
+
+
+### Arquivos, links
+
+[Protótipo de baixa fidelidade](https://www.figma.com/file/A6iuXOr5drlR5ZqRuPXSxP/log_alimentar), construido com [figma](https://www.figma.com/)
