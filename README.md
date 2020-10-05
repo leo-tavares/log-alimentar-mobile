@@ -1,5 +1,7 @@
 > :construction: projeto em constante evolução :construction:
 
+> testado apenas na plataforma android
+
 # log-alimentar
 
 ## Introdução 
@@ -29,6 +31,11 @@ E importante deixar claro que este repositório destinasse ao app mobile. Este p
 - [React native](https://reactnative.dev/)
 - [Figma](https://www.figma.com/file/A6iuXOr5drlR5ZqRuPXSxP/log_alimentar)
 - [WatermelonDB](https://github.com/Nozbe/WatermelonDB)
+
+## Como executar o projeto?
+
+Para executar o projeto basta apenas ter o ambiente do react-native configurado em sua maquina [link](https://reactnative.dev/docs/environment-setup), lembrando que esse projeto foi criado com a CLI do react-native.
+Um detalhe importante é que no **momento** o app está sendo testado apenas na plataforma android.
 
 ### Arquivos, links
 
