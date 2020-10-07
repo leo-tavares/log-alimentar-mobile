@@ -1,14 +1,22 @@
 > :construction: projeto em constante evolução :construction:
 
+> testado apenas na plataforma android
+
 # log-alimentar
 
-## Introdução 
+## Introdução
 
-A ideia é construir um app para acompanhar a rotina alimentar, independente do motivo, a aplicação será muito simples de ser utilizada e mantida :D. 
+A ideia é construir um app para acompanhar a rotina alimentar, independente do motivo, a aplicação será muito simples de ser utilizada e mantida :D.
 
 ## Esse app é para mim?
 
 Esse aplicativo é destinado a todas as pessoas que desejam uma maneira simples e pratica de acompanhar suas rotinas alimentares, não importa se é uma dieta para manter o peso, aumento de massa magra ou até mesmo por uma questão de enfermidades. O log-alimentar é pensado para vc :smile: !
+
+## Quais são as principais funcionalidades do app?
+
+- diário alimentar
+- Perfil com medidas corporias por exemplo: altura, peso, imc (índice de massa corporal), tbm (taxa metabólica basal))
+- Compartilhamento do progresso e/ou refeição com amigos e profissionais do ramo.
 
 ## Esse é mais daqueles app cheios de propagandas impositivas??
 
@@ -18,8 +26,16 @@ Esse aplicativo é destinado a todas as pessoas que desejam uma maneira simples 
 
 ## Quais tecnologias serão tecnologias empregadas?
 
-E importante deixar claro que este repositório destinasse ao app mobile. Este projeto esta sendo continuamente construido com o framework [react-native](https://reactnative.dev/). O backend será construido com o express e tbm teremos um "apoio" da arquitetura serverless para construção da alguns nanoserviços 
+E importante deixar claro que este repositório destinasse ao app mobile. Este projeto esta sendo continuamente construido com o framework [react-native](https://reactnative.dev/). O backend será construido com o express e tbm teremos um "apoio" de serverless para construção da alguns nanoserviços. É válido ressaltar que por se tratar de um app mobile a arquitetura "offline first" será utilizada, no caso, com o WatermelonDB.
 
+- [React native](https://reactnative.dev/)
+- [Figma](https://www.figma.com/file/A6iuXOr5drlR5ZqRuPXSxP/log_alimentar)
+- [WatermelonDB](https://github.com/Nozbe/WatermelonDB)
+
+## Como executar o projeto?
+
+Para executar o projeto basta apenas ter o ambiente do react-native configurado em sua maquina [link](https://reactnative.dev/docs/environment-setup), lembrando que esse projeto foi criado com a CLI do react-native.
+Um detalhe importante é que no **momento** o app está sendo testado apenas na plataforma android.
 
 ### Arquivos, links
 
