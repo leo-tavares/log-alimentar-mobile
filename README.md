@@ -4,9 +4,9 @@
 
 # log-alimentar
 
-## Introdução 
+## Introdução
 
-A ideia é construir um app para acompanhar a rotina alimentar, independente do motivo, a aplicação será muito simples de ser utilizada e mantida :D. 
+A ideia é construir um app para acompanhar a rotina alimentar, independente do motivo, a aplicação será muito simples de ser utilizada e mantida :D.
 
 ## Esse app é para mim?
 
