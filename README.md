@@ -2,6 +2,8 @@
 
 > testado apenas na plataforma android
 
+> veja o [github-project](https://github.com/leo-tavares/log-alimentar-mobile/projects/1) para acompanhar o roadmap do app
+
 # log-alimentar
 
 ## Introdução
