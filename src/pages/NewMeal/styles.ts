@@ -1,6 +1,8 @@
 import {FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import styled from 'styled-components/native';
+import {Form as Unform} from '@unform/mobile';
+import MealItemComponent from '../../components/MealItem';
 
 export const Container = styled.View`
   flex: 1;
@@ -19,40 +21,38 @@ export const MealTitleInput = styled.TextInput.attrs({
 })`
   align-self: center;
   text-align: center;
-  font-size: 36px;
+  font-size: 28px;
 `;
 
 export const FloatCloseButton = styled.TouchableOpacity`
   position: absolute;
-  right: -12px;
-  top: -12px;
+  right: -10px;
+  top: -10px;
 `;
 
 export const CloseIcon = styled(Icon).attrs({
   name: 'x',
-  size: 36,
+  size: 32,
 })`
   background: #7a7a7a;
   border-radius: 36px;
 `;
 
 export const MealItemsContainer = styled.View`
-  max-height: 300px;
-  padding: 8px;
+  margin: 0px 0px 4px;
 `;
 
-export const MealItems = styled(FlatList as new () => FlatList)``;
+export const MealItems = styled(
+  FlatList as new () => FlatList<typeof MealItemComponent>,
+)``;
 
-export const MealItem = styled.View`
-  margin: 2px 0px 8px 0px;
+export const Form = styled(Unform)`
+  max-height: 220px;
 `;
 
-export const MealItemName = styled.Text``;
-
-export const MealItemMacronutrients = styled.Text``;
+export const MealItem = styled(MealItemComponent)``;
 
 export const AddMoreMealItem = styled.TouchableOpacity`
-  margin-bottom: 8px;
   align-self: center;
 `;
 
@@ -65,9 +65,39 @@ export const AddMoreMealItemIcon = styled(Icon).attrs({
   border-radius: 40px;
 `;
 
+export const Macronutrients = styled.Text``;
+
+export const MealSummary = styled.View`
+  background: #6a93f2;
+  height: 40px;
+  border-radius: 8px;
+  margin: 0px 0px 4px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const CameraContainer = styled.View``;
+
+export const Camera = styled.TouchableOpacity`
+  margin: 8px 0px;
+  align-self: center;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const TextCamera = styled.Text``;
+
+export const MealPicture = styled.Image`
+  margin: 8px;
+  border-radius: 8px;
+  align-self: center;
+  height: 180px;
+  width: 80%;
+`;
+
 export const DoneBtn = styled.TouchableOpacity`
   background: #2b65ed;
-  height: 48px;
+  height: 40px;
   border-radius: 24px;
   justify-content: center;
   align-items: center;
