@@ -51,9 +51,10 @@ export const FloatCloseButton = styled.TouchableOpacity`
 `;
 
 export const CloseIcon = styled(Icon).attrs({
-  name: 'x',
-  size: 24,
+  name: 'trash-2',
+  size: 20,
 })`
+  padding: 4px;
   background: #df5555;
   border-radius: 36px;
 `;
