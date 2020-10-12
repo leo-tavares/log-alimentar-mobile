@@ -39,8 +39,7 @@ class Meal extends Model {
   updated_at!: Date;
 
   @action async listMealItems() {
-    const meal_itemsCollections = this.collections.get<MealItems>('meal_items');
-    const meal_items = await meal_itemsCollections.query().fetch();
+    const meal_items = this.meal_items.fetch();
     return meal_items;
   }
 
