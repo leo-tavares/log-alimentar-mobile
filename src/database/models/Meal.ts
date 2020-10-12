@@ -21,7 +21,7 @@ interface addMealItem {
 class Meal extends Model {
   static table = 'meals';
   static associations: Associations = {
-    meal_items: {type: 'has_many', foreignKey: 'meal_item_id'},
+    meal_items: {type: 'has_many', foreignKey: 'meal_id'},
   };
 
   @field('name')
