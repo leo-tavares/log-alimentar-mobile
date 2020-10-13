@@ -29,11 +29,11 @@ class MealItems extends Model {
   @relation('meals', 'meal_id')
   meal: any; //FIXME:
 
-  @readonly()
+  @readonly
   @date('created_at')
   createdAt!: Date;
 
-  @readonly()
+  @readonly
   @date('updated_at')
   updatedAt!: Date;
 }

@@ -30,13 +30,13 @@ class Meal extends Model {
   @children('meal_items')
   meal_items!: any; //FIXME:
 
-  @readonly()
+  @readonly
   @date('created_at')
-  created_at!: Date;
+  createdAt!: Date;
 
-  @readonly()
+  @readonly
   @date('updated_at')
-  updated_at!: Date;
+  updatedAt!: Date;
 
   @action async listMealItems() {
     const meal_items = this.meal_items.fetch();
