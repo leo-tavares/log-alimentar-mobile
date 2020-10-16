@@ -1,6 +1,7 @@
-import {Model} from '@nozbe/watermelondb';
+import {Model, Query} from '@nozbe/watermelondb';
 import {Associations} from '@nozbe/watermelondb/Model';
 import {date, field, readonly, relation} from '@nozbe/watermelondb/decorators';
+import Meal from './Meal';
 
 class MealItems extends Model {
   static table = 'meal_items';
@@ -27,7 +28,7 @@ class MealItems extends Model {
   fat!: number;
 
   @relation('meals', 'meal_id')
-  meal: any; //FIXME:
+  meal!: Query<Meal>; //FIXME:
 
   @readonly
   @date('created_at')

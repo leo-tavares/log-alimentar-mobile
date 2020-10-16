@@ -1,4 +1,4 @@
-import {Model} from '@nozbe/watermelondb';
+import {Model, Query} from '@nozbe/watermelondb';
 import {
   action,
   children,
@@ -28,7 +28,7 @@ class Meal extends Model {
   name!: string;
 
   @children('meal_items')
-  meal_items!: any; //FIXME:
+  meal_items!: Query<MealItems>; //FIXME:
 
   @readonly
   @date('created_at')
