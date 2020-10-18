@@ -24,6 +24,7 @@ import {
   TextCamera,
   MealPicture,
 } from './styles';
+import {useNewMeal} from '../../hooks/newMeal';
 
 const NewMeal: React.FC = () => {
   const [isModalVisible, setModalVisible] = useState(true);
@@ -31,11 +32,13 @@ const NewMeal: React.FC = () => {
   const [mealItems, setMealItems] = useState([MealItem]);
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
+  const {addMealName, resetNewMeal} = useNewMeal();
 
   const closeModal = useCallback(() => {
     setModalVisible(false);
+    resetNewMeal();
     navigation.navigate('Dashboard');
-  }, [navigation]);
+  }, [navigation, resetNewMeal]);
 
   const addMoreItem = useCallback(() => {
     if (mealItems.length >= 10) {
@@ -66,7 +69,10 @@ const NewMeal: React.FC = () => {
     <Container>
       <Modal isVisible={isModalVisible}>
         <ModalContent>
-          <MealTitleInput />
+          <MealTitleInput
+            multiline
+            onChangeText={(name) => addMealName(name)}
+          />
           <FloatCloseButton onPress={closeModal}>
             <CloseIcon />
           </FloatCloseButton>

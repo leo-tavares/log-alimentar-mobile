@@ -17,11 +17,13 @@ export const ModalContent = styled.View`
 `;
 
 export const MealTitleInput = styled.TextInput.attrs({
+  maxLength: 20,
   placeholder: 'Nome da refeição',
 })`
   align-self: center;
   text-align: center;
   font-size: 28px;
+  text-align: center;
 `;
 
 export const FloatCloseButton = styled.TouchableOpacity`
