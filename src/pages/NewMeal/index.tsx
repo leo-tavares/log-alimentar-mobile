@@ -29,6 +29,11 @@ const NewMeal: React.FC = () => {
     navigation.navigate('Dashboard');
   }, [navigation, resetNewMeal]);
 
+  const doneCallback = useCallback(() => {
+    addMeal(meal); //FIXME: interoperability of types, typescript issue
+    closeModal();
+  }, [addMeal, closeModal, meal]);
+
   const handleMealItems = (title: string) => addMealName(title);
 
   return (
@@ -42,8 +47,7 @@ const NewMeal: React.FC = () => {
           <MealItems />
           <MealSummary />
           <MealPicture />
-          {/*FIXME: interoperability of types */}
-          <DoneBtn onPress={() => addMeal(meal)}>
+          <DoneBtn onPress={doneCallback}>
             <DoneBtnText>Done</DoneBtnText>
           </DoneBtn>
         </ModalContent>
