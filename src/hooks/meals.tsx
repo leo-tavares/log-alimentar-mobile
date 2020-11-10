@@ -67,7 +67,11 @@ const MealsProvider: React.FC = ({children}) => {
     const loadMeals = async () => {
       const mealsRecord = await database.collections
         .get<MealModel>('meals')
-        .query(Q.where('created_at', Q.gte(subDays(Date.now(), 7).getTime())))
+        .query(
+          Q.where('created_at', Q.gte(subDays(Date.now(), 7).getTime())),
+          Q.experimentalSortBy('created_at', Q.desc),
+          Q.experimentalTake(10),
+        )
         .fetch();
       //lazy load mealItems
       const preFormattedMeals: PreFormattedMeals = await Promise.all(
