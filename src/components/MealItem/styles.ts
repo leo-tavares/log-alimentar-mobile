@@ -1,6 +1,6 @@
+import {TextInput} from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
-import Input from '../Input';
 
 export const Container = styled.View`
   border: 0.2px;
@@ -14,11 +14,13 @@ export const Description = styled.View`
   justify-content: center;
 `;
 
-export const Quantity = styled(Input)`
+export const Quantity = styled(TextInput)`
   text-align: right;
 `;
 
-export const Name = styled(Input)``;
+export const Name = styled(TextInput)`
+  width: 180px;
+`;
 
 export const MacronutrientsAndCalories = styled.View`
   flex-direction: row;
@@ -28,16 +30,19 @@ export const MacronutrientsAndCalories = styled.View`
 
 export const MacronutrientsConteiner = styled.View``;
 
-export const Carbohydrate = styled(Input)`
+export const Carbohydrate = styled(TextInput)`
   margin: 0px 8px;
+  text-align: right;
 `;
 
-export const Protein = styled(Input)`
+export const Protein = styled(TextInput)`
   margin: 0px 8px;
+  text-align: right;
 `;
 
-export const Fat = styled(Input)`
+export const Fat = styled(TextInput)`
   margin: 0px 8px;
+  text-align: right;
 `;
 
 export const Calories = styled.Text`

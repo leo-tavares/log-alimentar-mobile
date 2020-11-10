@@ -1,8 +1,6 @@
-import {FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import styled from 'styled-components/native';
-import {Form as Unform} from '@unform/mobile';
-import MealItemComponent from '../../components/MealItem';
+import MealItemsComponent from './components/MealItems';
 
 export const Container = styled.View`
   flex: 1;
@@ -20,6 +18,7 @@ export const MealTitleInput = styled.TextInput.attrs({
   maxLength: 20,
   placeholder: 'Nome da refeição',
 })`
+  max-width: 80%;
   align-self: center;
   text-align: center;
   font-size: 28px;
@@ -28,6 +27,12 @@ export const MealTitleInput = styled.TextInput.attrs({
 
 export const FloatCloseButton = styled.TouchableOpacity`
   position: absolute;
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  background-color: #7a7a7a;
+  justify-content: center;
+  align-items: center;
   right: -10px;
   top: -10px;
 `;
@@ -36,66 +41,14 @@ export const CloseIcon = styled(Icon).attrs({
   name: 'x',
   size: 32,
 })`
-  background: #7a7a7a;
-  border-radius: 36px;
+  background: transparent;
 `;
 
 export const MealItemsContainer = styled.View`
   margin: 0px 0px 4px;
 `;
 
-export const MealItems = styled(
-  FlatList as new () => FlatList<typeof MealItemComponent>,
-)``;
-
-export const Form = styled(Unform)`
-  max-height: 220px;
-`;
-
-export const MealItem = styled(MealItemComponent)``;
-
-export const AddMoreMealItem = styled.TouchableOpacity`
-  align-self: center;
-`;
-
-export const AddMoreMealItemIcon = styled(Icon).attrs({
-  name: 'plus',
-  size: 24,
-})`
-  text-align: center;
-  background: #2b65ed;
-  border-radius: 40px;
-`;
-
-export const Macronutrients = styled.Text``;
-
-export const MealSummary = styled.View`
-  background: #6a93f2;
-  height: 40px;
-  border-radius: 8px;
-  margin: 0px 0px 4px;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const CameraContainer = styled.View``;
-
-export const Camera = styled.TouchableOpacity`
-  margin: 8px 0px;
-  align-self: center;
-  justify-content: flex-end;
-  align-items: center;
-`;
-
-export const TextCamera = styled.Text``;
-
-export const MealPicture = styled.Image`
-  margin: 8px;
-  border-radius: 8px;
-  align-self: center;
-  height: 180px;
-  width: 80%;
-`;
+export const MealItems = styled(MealItemsComponent)``;
 
 export const DoneBtn = styled.TouchableOpacity`
   background: #2b65ed;

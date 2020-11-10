@@ -34,13 +34,22 @@ interface Meal {
   calories: Calories; // info detivada dos macronutrientes
 }
 
+interface AddMealItemDB {
+  name: string;
+  quantity: number;
+  quantity_unit: string;
+  carbohydrate: number;
+  protein: number;
+  fat: number;
+}
+
 type PreFormattedMeals = Array<Omit<Meal, 'calories' | 'macronutrients'>>;
 
 type Meals = Array<Meal>;
 
 type MealsContextData = {
   meals: Meals;
-  addMeal: (meal: Meal) => void;
+  addMeal: (meal: Omit<Meal, 'id'>) => void;
   // removeMeal: (mealIdx: number) => void; //embreve mealId após a integração com watermallonDB
   // updateMeal: (mealIdx: number) => void; //embreve mealId após a integração com watermallonDB
   // addMealItem: (itemIdx: number) => void; //embreve mealId após a integração com watermallonDB
@@ -156,7 +165,30 @@ const MealsProvider: React.FC = ({children}) => {
     loadMeals();
   }, [database.collections]);
 
-  const addMeal = (meal: Meal) => {
+  const addMeal = async (meal: Omit<Meal, 'id'>) => {
+    const mealCollection = database.collections.get<MealModel>('meals');
+
+    await database.action(async () => {
+      const newMeal = await mealCollection.create((mealRecord) => {
+        mealRecord.name = meal.name;
+      });
+      await newMeal.subAction(() => {
+        const mealItemDB = map<MealItem, AddMealItemDB>(
+          ({name, macronutrients, quantity, unit}) => ({
+            name,
+            quantity: Number(quantity),
+            quantity_unit: unit,
+            carbohydrate: Number(macronutrients.carbohydrate),
+            protein: Number(macronutrients.protein),
+            fat: Number(macronutrients.fat),
+          }),
+          meal.items,
+        );
+
+        return newMeal.addMealItems(mealItemDB);
+      });
+    });
+
     setMeals([...meals, meal]);
   };
 

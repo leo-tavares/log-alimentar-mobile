@@ -1,26 +1,26 @@
 import React, {createContext, useContext, useState} from 'react';
-import R from 'ramda';
+import R, {assocPath, dissocPath} from 'ramda';
 //only in grams
 interface Macronutrients {
-  carbohydrate: number;
-  protein: number;
-  fat: number;
+  carbohydrate: string;
+  protein: string;
+  fat: string;
 }
 
 interface Calories {
-  quantity: number;
+  quantity: string;
   unit: 'kcal' | 'kj'; //default Kcal. Kcal no DB converto no front caso necessário
 }
 
-interface MealItem {
+export interface MealItem {
   name: string;
-  quantity: number;
+  quantity: string;
   unit: string;
   macronutrients: Macronutrients;
   calories: Calories; // info detivada dos macronutrientes
 }
 
-interface Meal {
+export interface Meal {
   name: string;
   items: Array<MealItem>;
   macronutrients: Macronutrients; // info derivada dos items
@@ -31,7 +31,7 @@ type MealContextData = {
   meal: Meal;
   addMeal: (meal: Meal) => void;
   addMealName: (name: string) => void;
-  addMealItem: (mealItem: MealItem) => void;
+  addMealItem: () => void;
   updateMealItem: (itemIdx: number, mealItem: Partial<MealItem>) => void;
   removeMealItem: (itemIdx: number) => void;
   resetNewMeal: () => void;
@@ -39,8 +39,36 @@ type MealContextData = {
 
 const NewMealContext = createContext<MealContextData>({} as MealContextData);
 
+const defaultMealItem: MealItem = {
+  name: '',
+  quantity: '',
+  unit: '',
+  calories: {
+    quantity: '',
+    unit: 'kcal',
+  },
+  macronutrients: {
+    carbohydrate: '',
+    protein: '',
+    fat: '',
+  },
+};
+const defaultMeal: Meal = {
+  name: '',
+  items: [{...defaultMealItem}],
+  calories: {
+    quantity: '',
+    unit: 'kcal',
+  },
+  macronutrients: {
+    carbohydrate: '',
+    protein: '',
+    fat: '',
+  },
+};
+
 const NewMealProvider: React.FC = ({children}) => {
-  const [meal, setMeal] = useState<Meal>({} as Meal);
+  const [meal, setMeal] = useState<Meal>(defaultMeal);
 
   const addMeal = (newMeal: Meal) => {
     setMeal({...newMeal});
@@ -50,43 +78,33 @@ const NewMealProvider: React.FC = ({children}) => {
     setMeal(R.assoc('name', name, meal));
   };
 
-  const addMealItem = (mealItem: MealItem) => {
-    setMeal((oldMeal) => ({
-      ...oldMeal,
-      items: R.append(mealItem, oldMeal.items),
-    }));
-  };
-
-  const updateMealItem = (
-    itemIdx: number,
-    optionalMealProperties: Partial<MealItem>,
-  ) => {
-    const itemsClone = R.clone(meal.items);
-    const mealItem = itemsClone[itemIdx];
-    if (!mealItem) {
+  const addMealItem = () => {
+    if (meal.items.length >= 10) {
       return;
     }
-    const updatedItem = {
-      ...mealItem,
-      ...optionalMealProperties,
-    };
-    itemsClone[itemIdx] = updatedItem;
-
-    setMeal((oldMeal) => ({
-      ...oldMeal,
-      items: R.clone(itemsClone),
-    }));
+    setMeal({
+      ...meal,
+      items: [...meal.items, {...defaultMealItem}],
+    });
   };
 
   const removeMealItem = (itemIdx: number) => {
-    setMeal((oldMeal) => ({
-      ...meal,
-      items: R.remove(itemIdx, 1, oldMeal.items),
-    }));
+    if (meal.items.length <= 1) {
+      updateMealItem(0, defaultMealItem);
+    } else {
+      setMeal(dissocPath<Meal>(['items', itemIdx], meal));
+    }
   };
 
   const resetNewMeal = () => {
-    setMeal({} as Meal);
+    setMeal(defaultMeal);
+  };
+
+  const updateMealItem = (
+    idx: number,
+    optionalMealItemProperties: Partial<MealItem>,
+  ) => {
+    setMeal(assocPath(['items', idx], optionalMealItemProperties, meal));
   };
 
   return (

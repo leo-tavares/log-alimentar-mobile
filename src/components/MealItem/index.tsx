@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Text} from 'react-native';
+import {MealItem as MealItemType} from '../../hooks/newMeal';
 import {
   Container,
   Description,
@@ -15,30 +16,27 @@ import {
 } from './styles';
 
 interface Props {
-  idx: number;
-  removeItemCb?: (arg0: any) => any;
+  removeItemCb: (arg0: any) => void;
+  updateItemCb: (optionalProperty: Partial<MealItemType>) => void;
+  item: MealItemType;
 }
-
-interface MacronutrientsType {
-  carbohydrate: number;
-  fat: number;
-  protein: number;
-}
-
-const inputLimit = 3;
-
-const MealItem: React.FC<Props> = ({idx, removeItemCb = () => {}}) => {
-  const [calories, setCalories] = useState<number>();
-  const [macronutrients, setMacronutrients] = useState<MacronutrientsType>({
-    carbohydrate: 0,
-    protein: 0,
-    fat: 0,
-  });
+const MealItem: React.FC<Props> = ({
+  item,
+  removeItemCb = () => {},
+  updateItemCb = () => {},
+}) => {
+  const [calories, setCalories] = useState<string>('');
+  const {quantity, name: itemName, macronutrients} = item;
+  const {carbohydrate, protein, fat} = macronutrients;
 
   useEffect(() => {
-    const {carbohydrate, protein, fat} = macronutrients;
-    setCalories((carbohydrate + protein) * 4 + fat * 9);
-  }, [macronutrients]);
+    const partialCalories =
+      (Number(carbohydrate) + Number(protein)) * 4 + Number(fat) * 9;
+    setCalories(String(partialCalories || ''));
+  }, [carbohydrate, fat, protein]);
+
+  const inputLimit = 3;
+  console.log('render');
 
   return (
     <Container>
@@ -47,53 +45,76 @@ const MealItem: React.FC<Props> = ({idx, removeItemCb = () => {}}) => {
       </FloatCloseButton>
       <Description>
         <Quantity
-          name={`quantity-${idx}`}
-          maxLength={inputLimit}
+          value={String(quantity)}
           placeholder={'Quantidade'}
+          onChangeText={(qtd) => {
+            updateItemCb({...item, quantity: qtd});
+          }}
+          keyboardType={'numeric'}
+          maxLength={inputLimit}
         />
         <Text>g</Text>
-        <Name name={`name-${idx}`} placeholder={'nome do item'} />
+
+        <Name
+          value={itemName}
+          autoCapitalize={'none'}
+          onChangeText={(name) => updateItemCb({...item, name})}
+          numberOfLines={2}
+          multiline={true}
+          maxLength={150}
+          placeholder={'nome do item'}
+        />
       </Description>
       <MacronutrientsAndCalories>
         <Carbohydrate
-          name={`carbohydrate-${idx}`}
+          value={String(macronutrients.carbohydrate)}
+          onChangeText={(carb) =>
+            updateItemCb({
+              ...item,
+              macronutrients: {
+                ...item.macronutrients,
+                carbohydrate: carb,
+              },
+            })
+          }
+          returnKeyType={'next'}
           keyboardType={'numeric'}
           placeholder={'carb'}
           maxLength={inputLimit}
-          getValue={(carbohydrate) => {
-            setMacronutrients({
-              ...macronutrients,
-              carbohydrate: Number(carbohydrate),
-            });
-          }}
         />
         <Text>g</Text>
 
         <Protein
-          name={`protein-${idx}`}
+          value={String(macronutrients.protein)}
+          onChangeText={(prot) =>
+            updateItemCb({
+              ...item,
+              macronutrients: {
+                ...item.macronutrients,
+                protein: prot,
+              },
+            })
+          }
           keyboardType={'numeric'}
           placeholder={'prot'}
           maxLength={inputLimit}
-          getValue={(protein) => {
-            setMacronutrients({
-              ...macronutrients,
-              protein: Number(protein),
-            });
-          }}
         />
         <Text>g</Text>
 
         <Fat
-          name={`fat-${idx}`}
+          value={String(macronutrients.fat)}
+          onChangeText={(fat) =>
+            updateItemCb({
+              ...item,
+              macronutrients: {
+                ...item.macronutrients,
+                fat,
+              },
+            })
+          }
           keyboardType={'numeric'}
           placeholder={'gord'}
           maxLength={inputLimit}
-          getValue={(fat) => {
-            setMacronutrients({
-              ...macronutrients,
-              fat: Number(fat),
-            });
-          }}
         />
         <Text>g</Text>
 
@@ -103,4 +124,4 @@ const MealItem: React.FC<Props> = ({idx, removeItemCb = () => {}}) => {
   );
 };
 
-export default MealItem;
+export default React.memo(MealItem);
