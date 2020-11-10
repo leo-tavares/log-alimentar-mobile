@@ -36,7 +36,6 @@ const MealItem: React.FC<Props> = ({
   }, [carbohydrate, fat, protein]);
 
   const inputLimit = 3;
-  console.log('render');
 
   return (
     <Container>
