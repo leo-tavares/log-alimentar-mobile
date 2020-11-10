@@ -2,7 +2,7 @@ import {Database} from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 import {Platform} from 'react-native';
 
-import schema from './models/schema';
+import schema from './schema';
 import MealItems from './models/MealItems';
 import Meal from './models/Meal';
 
