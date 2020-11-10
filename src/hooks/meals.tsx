@@ -4,6 +4,7 @@ import MealModel from '../database/models/Meal';
 import {Q} from '@nozbe/watermelondb';
 import {subDays} from 'date-fns';
 import MealItems from '../database/models/MealItems';
+import {map} from 'ramda';
 
 //only in grams
 interface Macronutrients {
