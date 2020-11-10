@@ -27,6 +27,9 @@ class Meal extends Model {
   @field('name')
   name!: string;
 
+  @field('picture')
+  picture?: string;
+
   @children('meal_items')
   meal_items!: Query<MealItems>; //FIXME:
 

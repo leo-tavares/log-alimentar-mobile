@@ -8,6 +8,11 @@ const Meal = tableSchema({
       type: 'string',
     },
     {
+      name: 'picture',
+      type: 'string',
+      isOptional: true,
+    },
+    {
       name: 'meal_item_id',
       type: 'string',
       isIndexed: true,
