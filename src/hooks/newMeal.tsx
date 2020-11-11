@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useCallback, useContext, useState} from 'react';
 import R, {assocPath, dissocPath} from 'ramda';
 //only in grams
 interface Macronutrients {
@@ -22,6 +22,7 @@ export interface MealItem {
 
 export interface Meal {
   name: string;
+  picture: string | null;
   items: Array<MealItem>;
   macronutrients: Macronutrients; // info derivada dos items
   calories: Calories; // info detivada dos macronutrientes
@@ -31,6 +32,7 @@ type MealContextData = {
   meal: Meal;
   addMeal: (meal: Meal) => void;
   addMealName: (name: string) => void;
+  addMealPicture: (uri: string) => void;
   addMealItem: () => void;
   updateMealItem: (itemIdx: number, mealItem: Partial<MealItem>) => void;
   removeMealItem: (itemIdx: number) => void;
@@ -55,6 +57,7 @@ const defaultMealItem: MealItem = {
 };
 const defaultMeal: Meal = {
   name: '',
+  picture: null,
   items: [{...defaultMealItem}],
   calories: {
     quantity: '',
@@ -77,6 +80,13 @@ const NewMealProvider: React.FC = ({children}) => {
   const addMealName = (name: string) => {
     setMeal(R.assoc('name', name, meal));
   };
+
+  const addMealPicture = useCallback((uri: string) => {
+    setMeal((oldMeal) => ({
+      ...oldMeal,
+      picture: uri,
+    }));
+  }, []);
 
   const addMealItem = () => {
     if (meal.items.length >= 10) {
@@ -113,6 +123,7 @@ const NewMealProvider: React.FC = ({children}) => {
         meal,
         addMeal,
         addMealName,
+        addMealPicture,
         addMealItem,
         updateMealItem,
         removeMealItem,
